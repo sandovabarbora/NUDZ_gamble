@@ -124,12 +124,15 @@ missing-day set + `has_missing`, `usage_event` aggregates.
 ## Dexie stores
 ```txt
 profile:         "user_id"
-coping_strategy: "coping_strategy_id, user_id, type, priority, active"
-limits:          "limit_id, [user_id+week_no], user_id, week_no, limit_set_at"
-check_ins:       "check_in_id, [user_id+behavior_date], user_id, behavior_date, week_no, submitted_at, updated_at, played"
-reviews:         "review_id, [user_id+review_week_no], user_id, review_week_no, review_completed_at, incomplete"
+coping_strategy: "coping_strategy_id, user_id, type, priority"
+limits:          "limit_id, &[user_id+week_no], user_id, week_no, limit_set_at"
+check_ins:       "check_in_id, &[user_id+behavior_date], user_id, behavior_date, week_no, submitted_at, updated_at"
+reviews:         "review_id, &[user_id+review_week_no], user_id, review_week_no, review_completed_at"
 usage_events:    "usage_event_id, [user_id+occurred_at], user_id, event_type"
 ```
+`&[…]` = unique compound (enforces the invariants). Booleans (`active`,
+`played`, `incomplete`) are NOT indexed — IndexedDB can't index booleans;
+filter them in memory.
 
 ## Rules
 - Money/time = integers; % is float, display-time only, never persisted.
