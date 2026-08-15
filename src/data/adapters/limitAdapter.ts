@@ -19,6 +19,15 @@ export class LimitAdapter implements LimitPort {
     await this.repo.put(limit)
   }
 
+  async getByWeek(userId: UserId, weekNo: number): Promise<Limit | undefined> {
+    const [limit] = await this.repo.query({
+      where: { field: 'user_id', equals: userId },
+      filter: (l) => l.week_no === weekNo,
+      limit: 1,
+    })
+    return limit
+  }
+
   listByUser(userId: UserId): Promise<Limit[]> {
     return this.repo.query({ where: { field: 'user_id', equals: userId }, sortBy: 'week_no' })
   }

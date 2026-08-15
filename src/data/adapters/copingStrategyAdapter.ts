@@ -47,6 +47,10 @@ export class CopingStrategyAdapter implements CopingStrategyPort {
     await this.repo.put({ ...existing, active, updated_at: this.now() })
   }
 
+  get(copingStrategyId: string): Promise<CopingStrategy | undefined> {
+    return this.repo.get(copingStrategyId)
+  }
+
   listByUser(userId: UserId): Promise<CopingStrategy[]> {
     return this.repo.query({ where: { field: 'user_id', equals: userId }, sortBy: 'priority' })
   }

@@ -98,4 +98,21 @@ describe('onboarding adapters', () => {
       data.limits.save({ ...week1Limit, limit_id: 'limit-2', weekly_limit_time_min: 400 }),
     ).rejects.toThrow()
   })
+
+  it('gets a coping strategy by id', async () => {
+    const created = await data.copingStrategies.create({
+      user_id: 'A001',
+      label: 'Dechové cvičení',
+      type: 'default',
+      priority: 1,
+    })
+    await expect(data.copingStrategies.get(created.coping_strategy_id)).resolves.toEqual(created)
+    await expect(data.copingStrategies.get('nope')).resolves.toBeUndefined()
+  })
+
+  it('gets a limit by week', async () => {
+    await data.limits.save(week1Limit)
+    await expect(data.limits.getByWeek('A001', 1)).resolves.toEqual(week1Limit)
+    await expect(data.limits.getByWeek('A001', 2)).resolves.toBeUndefined()
+  })
 })

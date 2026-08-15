@@ -69,12 +69,14 @@ export interface CopingStrategyPort {
   loadDefaults(): Promise<CopingStrategyDefault[]>
   create(input: NewCopingStrategy): Promise<CopingStrategy>
   setActive(copingStrategyId: string, active: boolean): Promise<void>
+  get(copingStrategyId: string): Promise<CopingStrategy | undefined>
   listByUser(userId: UserId): Promise<CopingStrategy[]>
 }
 
 export interface LimitPort {
   /** Append-only: one limit per (user, week); a duplicate week is rejected. */
   save(limit: Limit): Promise<void>
+  getByWeek(userId: UserId, weekNo: number): Promise<Limit | undefined>
   listByUser(userId: UserId): Promise<Limit[]>
 }
 
