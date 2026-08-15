@@ -1,11 +1,109 @@
 import type { TranslationKey } from './cs.ts'
 
-/**
- * English mirrors cs.ts key-for-key. `Record<TranslationKey, string>` makes a
- * missing or extra key a type error, so the mirror can't silently drift.
- */
+/** English mirrors the Czech source key-for-key. */
 export const en: Record<TranslationKey, string> = {
   'app.title': 'NUDZ Gamble',
-  'app.subtitle':
-    'Bootstrap running: React, TypeScript, Vite, Tailwind, Dexie, ESLint, Prettier, Vitest.',
+  'app.subtitle': 'Bootstrap running: the app is ready for local work.',
+  'app.loading': 'Loading your strategies…',
+  'common.back': 'Back',
+  'common.close': 'Close',
+  'common.selected': 'Selected',
+  'intro.eyebrow': '28 days for a clearer picture',
+  'intro.title': 'Understand your gambling better',
+  'intro.body':
+    'A short programme helps you track gambling, set limits and prepare a plan for difficult moments.',
+  'intro.point1': 'A daily entry only takes a few minutes',
+  'intro.point2': 'Data stays on this device',
+  'intro.point3': 'You decide what you want to change',
+  'intro.disclaimerTitle': 'This is not treatment',
+  'intro.disclaimerBody':
+    'The app does not replace professional care. If gambling is causing an acute problem, contact professional support.',
+  'intro.start': 'Start',
+  'onboarding.eyebrow': 'Final step',
+  'onboarding.title': 'What will you do when you want to gamble?',
+  'onboarding.body':
+    'Choose at least one concrete activity. We will remind you when you approach your limit.',
+  'onboarding.customLabel': 'Your own strategy (optional)',
+  'onboarding.customPlaceholder': 'E.g. I will visit a friend',
+  'onboarding.noteLabel': 'What will help you start? (optional)',
+  'onboarding.notePlaceholder': 'E.g. I will message them right now',
+  'onboarding.finish': 'Finish setup',
+  'onboarding.count': 'Selected strategies: {{count}}',
+  'onboarding.selectionRequired': 'Choose at least one strategy.',
+  'nav.home': 'Home',
+  'nav.label': 'Main navigation',
+  'nav.coping': 'Coping strategies',
+  'nav.overview': 'Insights',
+  'nav.profile': 'Profile',
+  'dashboard.eyebrow': 'Week 1 of 4',
+  'dashboard.title': 'Hello, today is day 6',
+  'dashboard.body':
+    'Log gambling as you go. You will see how much room remains in your weekly plan.',
+  'dashboard.time': 'Gambling time',
+  'dashboard.money': 'Deposits',
+  'dashboard.remaining': '{{value}} remaining',
+  'dashboard.today': "Today's log",
+  'dashboard.todayBody': 'You have no entry today yet.',
+  'dashboard.add': 'Add entry',
+  'dashboard.copingTitle': 'Your plan for a difficult moment',
+  'dashboard.copingBody': 'You have {{count}} strategies ready. You can edit them any time.',
+  'dashboard.openCoping': 'View strategies',
+  'coping.eyebrow': 'Your personal plan',
+  'coping.title': 'Coping strategies',
+  'coping.body':
+    'Short, concrete steps that may help you gain distance from an urge to gamble. They are neither a ban nor a test of willpower.',
+  'coping.selectedTitle': 'What you want close at hand',
+  'coping.selectedBody':
+    'We will remind you of selected strategies when you approach a limit. At least one must remain active.',
+  'coping.learnTitle': 'How to use them',
+  'coping.learn1Title': 'Notice the moment',
+  'coping.learn1Body': 'Notice the urge and briefly postpone the decision whether to gamble.',
+  'coping.learn2Title': 'Take a small step',
+  'coping.learn2Body': 'Choose an activity you can realistically begin within a few minutes.',
+  'coping.learn3Title': 'Check the result',
+  'coping.learn3Body':
+    'Then notice whether the urge changed. If not, try another step or seek support from another person.',
+  'coping.allTitle': 'All strategies',
+  'coping.addTitle': 'Add your own strategy',
+  'coping.addBody': 'Phrase it as a concrete activity you can do instead of gambling immediately.',
+  'coping.customTitleLabel': 'What will you do?',
+  'coping.customTitlePlaceholder': 'E.g. I will move to another room',
+  'coping.customNoteLabel': 'How will you make it easier? (optional)',
+  'coping.customNotePlaceholder': 'E.g. I will leave my phone on the table',
+  'coping.add': 'Add strategy',
+  'coping.customBadge': 'Custom',
+  'coping.activeBadge': 'Active',
+  'coping.inactiveBadge': 'Inactive',
+  'coping.whyLabel': 'Why it may help',
+  'coping.whenLabel': 'When to try it',
+  'coping.errorRequired': 'Write down a concrete action.',
+  'coping.errorSave': 'The strategy could not be saved. Try again.',
+  'coping.errorLast': 'Keep at least one strategy active.',
+  'strategy.walk-15.title': 'Go outside for 15 minutes',
+  'strategy.walk-15.summary': 'Change your surroundings briefly and give the urge time to weaken.',
+  'strategy.walk-15.why':
+    'It interrupts the automatic sequence and creates room for another decision.',
+  'strategy.walk-15.when': 'When you reach for your phone or open a gambling website.',
+  'strategy.call-close-person.title': 'Call someone close',
+  'strategy.call-close-person.summary': 'Connect before you are left alone with the urge.',
+  'strategy.call-close-person.why':
+    'Contact can redirect attention and offer support without judgement.',
+  'strategy.call-close-person.when': 'When the urge is strong or repeatedly returns.',
+  'strategy.take-shower.title': 'Take a shower',
+  'strategy.take-shower.summary': 'Focus attention on a simple physical activity.',
+  'strategy.take-shower.why': 'A change in stimuli can interrupt a habitual scenario.',
+  'strategy.take-shower.when': 'When you are home and need to quickly shift the situation.',
+  'strategy.name-feeling.title': 'Write down what I feel',
+  'strategy.name-feeling.summary': 'Name the urge, emotion and situation without judgement.',
+  'strategy.name-feeling.why': 'Naming can help separate a feeling from immediate action.',
+  'strategy.name-feeling.when': 'When you do not know what triggered the urge or feel overwhelmed.',
+  'strategy.go-running.title': 'Go for a run',
+  'strategy.go-running.summary': 'Redirect energy into familiar movement.',
+  'strategy.go-running.why':
+    'Movement changes the context and may reduce tension linked to the urge.',
+  'strategy.go-running.when':
+    'When you have more time and movement is safe and accessible for you.',
+  'placeholder.title': 'This section comes next',
+  'placeholder.body':
+    'The first version currently focuses on coping strategies and their role in the programme.',
 }

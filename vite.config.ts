@@ -18,8 +18,8 @@ export default defineConfig({
         description:
           'Aplikace pro sebekontrolu nad hazardním hraním: referenční týden, limity, denní check-in a týdenní review.',
         lang: 'cs',
-        theme_color: '#0f172a',
-        background_color: '#0f172a',
+        theme_color: '#1f6f5c',
+        background_color: '#fbf8f3',
         display: 'standalone',
         orientation: 'portrait',
         start_url: '/',

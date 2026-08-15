@@ -20,15 +20,24 @@ Storage key: `user_id`
 
 ## coping_strategy (many records per user)
 
-User-selected coping strategies.
+The user's coping plan. Catalog strategies are stored by stable semantic ID;
+custom strategies keep user-authored copy. A row can exist without being
+selected, so changing the plan does not destroy history or conflate catalog
+availability with the user's current choice.
 
 | Field | Type | Notes |
 |---|---|---|
-| coping_strategy_id | string | UUID/local stable id |
+| coping_strategy_id | string | `catalog:<catalog_strategy_id>` or `custom:<UUID>` |
 | user_id | string | links to `profile.user_id` |
-| coping_strategy | string | one chosen strategy |
+| source | `catalog` \| `custom` | provenance; never inferred from the title |
+| catalog_strategy_id | enum, nullable | stable copy-independent catalog key |
+| custom_title | string, nullable | required for `custom`, max 80 characters |
+| custom_note | string, nullable | optional implementation cue, max 240 characters |
+| is_selected | 0 \| 1 | part of the user's current reminder plan |
+| sort_order | non-negative int | stable display order |
 | created_at | timestamp | ISO 8601 with timezone |
 | updated_at | timestamp | ISO 8601 with timezone |
+| archived_at | timestamp, nullable | soft delete for a custom strategy |
 
 Storage key: `coping_strategy_id`
 
@@ -84,7 +93,7 @@ Unique key: `user_id + review_week_no`
 
 ```txt
 profile: "user_id"
-coping_strategy: "coping_strategy_id, user_id, updated_at"
+coping_strategies: "coping_strategy_id, user_id, source, catalog_strategy_id, updated_at, archived_at"
 limits: "limit_id, [user_id+week_no], user_id, week_no, limit_set_at"
 check_ins: "check_in_id, [user_id+behavior_date], user_id, behavior_date, submitted_at, updated_at, played"
 reviews: "review_id, [user_id+review_week_no], user_id, review_week_no, review_completed_at, incomplete"
@@ -107,6 +116,10 @@ kind of thing a technical jury checks by editing seed data and reloading.
 5. `winnings_czk` never enters a limit calculation, anywhere
 6. No record for a day ≠ a zero record for that day. Two distinct states,
    never conflate them.
+7. At least one active coping strategy has `is_selected == 1` after onboarding.
+8. `source == catalog` ⟹ catalog ID present and custom fields null.
+9. `source == custom` ⟹ custom title present and catalog ID null.
+10. Archived strategies are never selected or shown in the active plan.
 
 ## Patterns worth using
 - Value objects for `Minutes` and `Czk`. Both are plain integers, which is

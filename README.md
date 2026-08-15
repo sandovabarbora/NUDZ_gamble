@@ -2,9 +2,9 @@
 
 PWA for harm reduction in gambling — DigiWELL Hackathon 2026.
 
-> **Status: technology bootstrap only.** The toolchain, build, PWA shell and the three
-> test runners are wired up and green. No intervention logic has been implemented yet;
-> `src/domain/` is intentionally empty.
+> **Status: technology bootstrap plus coping-strategies vertical slice.** The coping
+> onboarding, personal strategy plan, persistence and responsive navigation are
+> implemented. The remaining intervention flows are still planned work.
 
 ## Stack
 
@@ -57,6 +57,18 @@ npm run dev               # http://localhost:5173 (also served on the LAN IP)
 | `npm run test:all`      | Unit + e2e tests                                            |
 | `npm run check`         | typecheck + lint + format:check + Jest (CI gate)            |
 
+## Coping strategies prototype
+
+The branch `codex/coping-strategies-v1` contains the first end-to-end coping
+plan slice: onboarding defaults, user-authored strategies, IndexedDB
+persistence, a dedicated responsive navigation destination and research-backed
+product rationale. Start with [the v1 product specification](docs/coping-strategies-v1.md)
+and [the expanded domain model](src/data/docs/domain-model.md).
+
+The implementation intentionally positions coping as a self-management aid,
+not treatment. At least one strategy must remain active; catalog copy is keyed
+by stable IDs and custom copy is stored separately.
+
 ## Layout
 
 ```
@@ -104,11 +116,10 @@ Icons in `public/` are generated for this repository and carry no third-party li
 
 ## Known gaps
 
-- `src/domain/` is empty — no intervention logic, limits, check-in or review flow yet.
-- `src/data/db.ts` opens a placeholder store (`_bootstrap`); the real schema is not modelled.
+- Limits, check-in and review domain logic are not implemented yet.
+- IndexedDB currently models coping strategies; the remaining entities still need stores.
 - CSV export, seed/demo mode and the reminder scenario required by the brief are not built.
-- Playwright's `mobile-safari` project needs `npx playwright install webkit`; only
-  Chromium was installed and exercised so far.
+- The caution/exceeded reminder still needs to consume the selected coping plan.
 
 ## Tooling disclosure
 
